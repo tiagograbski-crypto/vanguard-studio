@@ -11,7 +11,8 @@ import {
   Diamond,
   ShieldCheck,
   Award,
-  Droplet
+  Droplet,
+  Crown
 } from 'lucide-react';
 
 const App = () => {
@@ -114,7 +115,7 @@ const App = () => {
             --green-abyssal: #010B07;  /* Verde meia-noite, base absoluta */
             --green-onyx: #03140D;     /* Superfícies elevadas */
             --green-lines: #0A2B1D;    /* Contornos orgânicos escuros */
-            --green-sage: #C2D1C9;     /* Sálvia Imperial para Quebra Cognitiva */
+            --green-sage: #C2D1C9;     /* Sálvia Imperial (Usado agora como reflexo) */
             
             --gold-light: #FCF6BA;
             --gold-main: #BF953F;
@@ -146,18 +147,21 @@ const App = () => {
             -webkit-backdrop-filter: blur(20px);
         }
 
-        /* MENU JATEADO (FROSTED GLASS) - Corrige o ofuscamento total da tela */
-        .glass-menu-overlay {
-            background: rgba(1, 11, 7, 0.4); /* Fundo sutil esverdeado para preservar a cor do site */
-            backdrop-filter: blur(40px) saturate(120%) brightness(1.1); /* Desfoque intenso e luz elevada */
-            -webkit-backdrop-filter: blur(40px) saturate(120%) brightness(1.1);
+        /* FAIXA MARQUEE TRANSLÚCIDA (A Nova Quebra Cognitiva Refinada) */
+        .glass-marquee {
+            background: linear-gradient(90deg, rgba(3, 20, 13, 0.6) 0%, rgba(194, 209, 201, 0.03) 50%, rgba(3, 20, 13, 0.6) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(191, 149, 63, 0.3);
+            border-bottom: 1px solid rgba(191, 149, 63, 0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
         }
 
-        /* TEXT STROKE PARA A QUEBRA COGNITIVA (Vazado) */
-        .text-stroke-green {
-            color: transparent;
-            -webkit-text-stroke: 1px var(--green-abyssal);
-            opacity: 0.8;
+        /* MENU JATEADO (FROSTED GLASS) */
+        .glass-menu-overlay {
+            background: rgba(1, 11, 7, 0.4); 
+            backdrop-filter: blur(40px) saturate(120%) brightness(1.1); 
+            -webkit-backdrop-filter: blur(40px) saturate(120%) brightness(1.1);
         }
 
         .reveal-mask {
@@ -183,7 +187,7 @@ const App = () => {
         .section-title { font-size: var(--fluid-h2); line-height: 1; }
         .body-text { font-size: var(--fluid-p); }
         
-        /* Ouro 24k de Alta Refração */
+        /* Ouro 24k de Alta Refração (Massivo) */
         .text-true-gold {
             background: linear-gradient(to right, var(--gold-main) 0%, var(--gold-light) 25%, var(--gold-dark) 50%, var(--gold-light) 75%, var(--gold-main) 100%);
             background-size: 200% auto;
@@ -192,6 +196,24 @@ const App = () => {
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: shine 4s linear infinite;
+        }
+
+        /* Ouro 24k Slim (Fino e elegante para detalhes) */
+        .text-true-gold-slim {
+            background: linear-gradient(to right, var(--gold-main) 0%, var(--gold-light) 30%, var(--gold-dark) 70%, var(--gold-main) 100%);
+            background-size: 200% auto;
+            color: #000;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 5s linear infinite;
+            font-weight: 300;
+        }
+
+        /* Texto Vazado Dourado */
+        .text-stroke-gold {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(191, 149, 63, 0.7);
         }
         
         @keyframes shine { to { background-position: 200% center; } }
@@ -218,7 +240,7 @@ const App = () => {
         }
 
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .animate-marquee { display: flex; width: 200%; animation: marquee 25s linear infinite; }
+        .animate-marquee { display: flex; width: 200%; animation: marquee 30s linear infinite; }
 
         /* Luzes Atmosféricas */
         .ambient-glow-gold { background: radial-gradient(circle, rgba(191, 149, 63, 0.12) 0%, transparent 60%); }
@@ -250,7 +272,7 @@ const App = () => {
             <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-[var(--gold-main)]/40 flex items-center justify-center text-[var(--gold-main)] bg-[var(--green-onyx)] shadow-[0_0_15px_rgba(191,149,63,0.15)]">
                 <Diamond size={14} className="md:w-4 md:h-4" />
             </div>
-            <div className="text-xs md:text-sm font-tech font-bold tracking-[0.2em] uppercase text-white">VANGUARD<span className="text-true-gold font-editorial italic ml-1 lowercase">studio</span></div>
+            <div className="text-xs md:text-sm font-tech font-bold tracking-[0.2em] uppercase text-white">VANGUARD<span className="text-true-gold-slim font-editorial italic ml-1 lowercase">studio</span></div>
           </div>
           
           <div className="hidden lg:flex gap-12 items-center">
@@ -273,7 +295,7 @@ const App = () => {
         </div>
       </nav>
 
-      {/* MENU MOBILE JATEADO (BUG FIX: Vidro Ofuscante Translúcido ao invés de cor sólida) */}
+      {/* MENU MOBILE JATEADO (BUG FIX) */}
       <div className={`fixed inset-0 z-[150] glass-menu-overlay transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between p-6 md:p-12 ${mobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
           <div className="flex justify-end">
             <button className="text-[var(--gold-main)] p-4 -mr-4 hover:rotate-90 hover:text-white transition-all duration-500" onClick={() => setMobileMenuOpen(false)}>
@@ -290,7 +312,6 @@ const App = () => {
                     onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); }} 
                     onMouseEnter={handleHoverEnter} 
                     onMouseLeave={handleHoverLeave}
-                    /* O atraso no fade-in para as opções do menu cria a coreografia certa */
                     style={{ transitionDelay: mobileMenuOpen ? `${i * 0.1}s` : '0s' }}
                     className={`hero-title font-editorial italic text-white hover:text-[var(--gold-main)] transition-all duration-500 md:hover:translate-x-4 border-b border-[var(--gold-main)]/10 pb-2 md:pb-6 ${mobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}
                 >
@@ -304,7 +325,7 @@ const App = () => {
           </div>
       </div>
 
-      {/* HERO SECTION - Profundidade Extrema */}
+      {/* HERO SECTION */}
       <section className="relative h-[100dvh] w-full flex flex-col justify-end pb-12 md:pb-24 px-6 md:px-[5%] overflow-hidden bg-[var(--green-abyssal)]">
         
         <div className="absolute top-1/4 left-0 w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] ambient-glow-green -translate-x-1/2 -translate-y-1/2" />
@@ -350,38 +371,47 @@ const App = () => {
         </div>
       </section>
 
-      {/* QUEBRA COGNITIVA - LUZ EDITORIAL E CONTORNOS VAZADOS */}
-      <div className="w-full bg-[var(--green-sage)] py-8 overflow-hidden relative z-20 shadow-[0_20px_50px_rgba(0,0,0,0.8)] border-y border-[var(--gold-main)]/30">
+      {/* A NOVA QUEBRA COGNITIVA - VIDRO TRANSLÚCIDO & COPY DE ELITE */}
+      <div className="w-full glass-marquee py-6 md:py-8 overflow-hidden relative z-20">
           <div className="animate-marquee items-center">
               {[1, 2].map((loop) => (
-                  <div key={loop} className="flex items-center justify-around w-1/2 min-w-max px-8 gap-16 text-[var(--green-abyssal)]">
+                  <div key={loop} className="flex items-center justify-around w-1/2 min-w-max px-8 gap-12 md:gap-20">
+                      
+                      {/* Selo 1 */}
                       <div className="flex items-center gap-3">
-                          <ShieldCheck size={24} className="text-[var(--green-abyssal)]" strokeWidth={1.5} />
-                          <span className="text-sm font-tech font-black uppercase tracking-[0.4em] text-[var(--green-abyssal)]">O PADRÃO OURO</span>
+                          <Crown size={24} className="text-[var(--gold-main)] drop-shadow-[0_0_10px_rgba(191,149,63,0.5)]" strokeWidth={1.5} />
+                          <span className="text-sm md:text-base font-tech text-true-gold-slim uppercase tracking-[0.3em]">CONFIANÇA INABALÁVEL</span>
                       </div>
-                      <span className="text-[var(--green-abyssal)] opacity-30 text-2xl px-4">•</span>
                       
-                      {/* Texto com Contorno Vazado (Text Stroke) */}
-                      <span className="text-2xl md:text-3xl font-editorial italic font-bold uppercase tracking-widest text-stroke-green">
-                          PRECISÃO ABSOLUTA
+                      <span className="text-[var(--gold-main)] opacity-30 text-2xl px-4">•</span>
+                      
+                      {/* Texto Vazado */}
+                      <span className="text-2xl md:text-4xl font-editorial italic font-bold uppercase tracking-widest text-stroke-gold">
+                          ESTÉTICA DE PODER
                       </span>
                       
-                      <span className="text-[var(--green-abyssal)] opacity-30 text-2xl px-4">•</span>
-                      <span className="text-sm font-tech font-black uppercase tracking-[0.4em] text-[var(--green-abyssal)]">MESTRIA TÉCNICA</span>
-                      <span className="text-[var(--green-abyssal)] opacity-30 text-2xl px-4">•</span>
+                      <span className="text-[var(--gold-main)] opacity-30 text-2xl px-4">•</span>
                       
-                      {/* Texto com Contorno Vazado (Text Stroke) */}
-                      <span className="text-2xl md:text-3xl font-editorial italic font-bold uppercase tracking-widest text-stroke-green">
-                          ENGENHARIA FACIAL
+                      {/* Selo 2 */}
+                      <div className="flex items-center gap-3">
+                          <Award size={24} className="text-[var(--gold-main)] drop-shadow-[0_0_10px_rgba(191,149,63,0.5)]" strokeWidth={1.5} />
+                          <span className="text-sm md:text-base font-tech text-true-gold-slim uppercase tracking-[0.3em]">ALTA PERFORMANCE VISUAL</span>
+                      </div>
+
+                      <span className="text-[var(--gold-main)] opacity-30 text-2xl px-4">•</span>
+                      
+                      {/* Texto Vazado 2 */}
+                      <span className="text-2xl md:text-4xl font-editorial italic font-bold uppercase tracking-widest text-stroke-gold">
+                          STATUS & DISCRIÇÃO
                       </span>
                       
-                      <span className="text-[var(--green-abyssal)] opacity-30 text-2xl px-4">•</span>
+                      <span className="text-[var(--gold-main)] opacity-30 text-2xl px-4">•</span>
                   </div>
               ))}
           </div>
       </div>
 
-      {/* PORTFÓLIO (LOOKBOOK) - Efeito Bisotê nos Cards */}
+      {/* PORTFÓLIO (LOOKBOOK) */}
       <section className="py-24 md:py-32 overflow-hidden bg-[var(--green-onyx)] relative">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] ambient-glow-gold -translate-y-1/2 translate-x-1/4 pointer-events-none" />
 
@@ -411,7 +441,6 @@ const App = () => {
                     loading="lazy"
                 />
                 
-                {/* O Contorno e Profundidade (Glass Contour) */}
                 <div className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 glass-contour p-6 md:p-8 rounded-lg transition-transform duration-500 group-hover:translate-y-[-10px]">
                     <span className="text-[9px] md:text-[10px] font-tech uppercase tracking-[0.4em] text-[var(--gold-main)] block mb-3 font-bold">{String(i + 1).padStart(2, '0')} — {item.d}</span>
                     <h3 className="text-2xl md:text-3xl font-editorial italic text-white tracking-wide">{item.t}</h3>
